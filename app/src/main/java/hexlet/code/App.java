@@ -2,6 +2,7 @@ package hexlet.code;
 
 import hexlet.code.games.Calc;
 import hexlet.code.games.Even;
+import hexlet.code.games.GCD;
 
 import java.util.Scanner;
 
@@ -16,6 +17,7 @@ public class App {
                         + "1 - Greet\n"
                         + "2 - Even\n"
                         + "3 - Calc\n"
+                        + "4 - GCD\n"
                         + "0 - Exit\n"
                         + "Your choice: ";
         System.out.print(gameList);
@@ -24,17 +26,24 @@ public class App {
         int gameNumber = scanner.nextInt();
 
         // Номер игры должен быть из списка, кроме 0
-        if (gameNumber > 0 && gameNumber < 4) {
+        if (gameNumber > 0 && gameNumber < 5) {
 
             // Приветствуем игрока и возвращаем его имя
             String userName = Cli.greet(scanner);
 
-            if (gameNumber == 2) {
-                // Игра "Проверка на чётность"
-                Even.startGame(scanner, userName);
-            } else if (gameNumber == 3) {
-                // Игра "Калькулятор"
-                Calc.startGame(scanner, userName);
+            switch (gameNumber) {
+                case 2:
+                    // Игра "Проверка на чётность"
+                    Even.startGame(scanner, userName);
+                    break;
+                case 3:
+                    // Игра "Калькулятор"
+                    Calc.startGame(scanner, userName);
+                    break;
+                case 4:
+                    // Игра "НОД"
+                    GCD.startGame(scanner, userName);
+                    break;
             }
         }
 
