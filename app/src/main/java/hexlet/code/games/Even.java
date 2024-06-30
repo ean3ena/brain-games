@@ -19,29 +19,33 @@ public class Even {
             int randomNumber = Engine.getRandomNumber();
 
             // Расчитываем ожидаемый ответ
-            String expectedAnswer = randomNumber % 2 == 0 ? "yes" : "no";
+            String expectedAnswer = getExpectedAnswer(randomNumber);
 
-            // Выводим вопрос игроку
-            Engine.showQuestion(randomNumber);
-
-            // Выводим предложение игроку ввести свой ответ
-            Engine.requestAnswer();
+            // Выводим вопрос игроку и предложение ввести ответ
+            Engine.requestPlayerAnswer(randomNumber);
 
             // Получаем ответ игрока
             String answer = scanner.next();
 
             // Сравниваем ответ игрока с ожидаемым ответом
-            if (Engine.isCorrectAnswer(answer, expectedAnswer)) {
-                Engine.notifyCorrectAnswer();
-            } else {
-                Engine.notifyWrongAnswer(answer, expectedAnswer, userName);
+            boolean isPlayerAnswerCorrect = Engine.checkPlayerAnswer(userName, answer, expectedAnswer);
+
+            // Если ответ неверный, то прекращаем игру
+            if (!isPlayerAnswerCorrect) {
                 break;
             }
 
             attemptCount--;
         }
-        // Поздравляем с успешным окончанием игры
-        Engine.showCongratulation(attemptCount, userName);
 
+        // Поздравляем с успешным окончанием игры
+        if (attemptCount == 0) {
+            Engine.showCongratulation(userName);
+        }
+
+    }
+
+    public static String getExpectedAnswer(int randomNumber) {
+        return randomNumber % 2 == 0 ? "yes" : "no";
     }
 }
