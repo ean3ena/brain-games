@@ -16,58 +16,78 @@ public class Calc {
         // Если попытка успешная и попытки не закончились
         while (attemptCount > 0) {
 
-            // Получаем номер случайной операции: "+", "-", "*"
-            // Для этого сопоставим каждую операцию со случайным числом из соответствующего диапазона:
-            // 0-30 - "+"
-            // 31-60 - "-"
-            // 61-100 - "*"
-            int numberRandomOperation = Engine.getRandomNumber();
-
             // Получаем первое случайное число
             int firstRandomNumber = Engine.getRandomNumber();
 
             // Получаем второе случайное число
             int secondRandomNumber = Engine.getRandomNumber();
 
-            String operationString = "";
-            int expectedAnswer = 0;
+            // Расчитываем тип операции по случайному числу
+            String randomTypeOperation = getRandomTypeOperation();
 
-            // Расчитываем ожидаемый ответ и строку операции по случайному числу
-            if (numberRandomOperation >= 0 && numberRandomOperation <= 30) {
-                // Операция "+"
-                operationString = " + ";
-                expectedAnswer = firstRandomNumber + secondRandomNumber;
-            } else if (numberRandomOperation >= 31 && numberRandomOperation <= 60) {
-                // Операция "-"
-                operationString = " - ";
-                expectedAnswer = firstRandomNumber - secondRandomNumber;
-            } else if (numberRandomOperation >= 61 && numberRandomOperation <= 100) {
-                // Операция "*"
-                operationString = " * ";
-                expectedAnswer = firstRandomNumber * secondRandomNumber;
-            }
+            // Расчитываем ожидаемый ответ
+            int expectedAnswer = calculateByTypeOperation(firstRandomNumber, secondRandomNumber,randomTypeOperation);
 
-            // Выводим вопрос игроку
-            Engine.showQuestion(firstRandomNumber + operationString + secondRandomNumber);
-
-            // Выводим предложение игроку ввести свой ответ
-            Engine.requestAnswer();
+            // Выводим игроку вопрос и предложение ввести ответ
+            String expressionForQuestion = firstRandomNumber + randomTypeOperation + secondRandomNumber;
+            Engine.requestPlayerAnswer(expressionForQuestion);
 
             // Получаем ответ игрока
             int answer = scanner.nextInt();
 
             // Сравниваем ответ игрока с ожидаемым ответом
-            if (Engine.isCorrectAnswer(answer, expectedAnswer)) {
-                Engine.notifyCorrectAnswer();
-            } else {
-                Engine.notifyWrongAnswer(answer, expectedAnswer, userName);
+            boolean isPlayerAnswerCorrect = Engine.checkPlayerAnswer(userName, answer, expectedAnswer);
+
+            // Если ответ неверный, то прекращаем игру
+            if (!isPlayerAnswerCorrect) {
                 break;
             }
 
             attemptCount--;
         }
-        // Поздравляем с успешным окончанием игры
-        Engine.showCongratulation(attemptCount, userName);
 
+        // Если все попытки успешные, то поздравляем с успешным окончанием игры
+        if (attemptCount == 0) {
+            Engine.showCongratulation(userName);
+        }
+
+    }
+
+    public static String getRandomTypeOperation() {
+
+        // Получаем случайное число для определения типа операции: "+", "-", "*"
+        // Для этого сопоставим тип операции с соответствующими диапазонами случайных чисел:
+        // 0-30 - "+"
+        // 31-60 - "-"
+        // 61-100 - "*"
+        int randomNumber = Engine.getRandomNumber();
+
+        String typeOperation = "";
+
+        if (randomNumber >= 0 && randomNumber <= 30) {
+            // Операция "+"
+            typeOperation = " + ";
+        } else if (randomNumber >= 31 && randomNumber <= 60) {
+            // Операция "-"
+            typeOperation = " - ";
+        } else if (randomNumber >= 61 && randomNumber <= 100) {
+            // Операция "*"
+            typeOperation = " * ";
+        }
+        return typeOperation;
+    }
+
+    public static int calculateByTypeOperation(int firstNumber, int secondNumber, String operation) {
+
+        switch (operation) {
+            case " + ":
+                return firstNumber + secondNumber;
+            case " - ":
+                return firstNumber - secondNumber;
+            case " * ":
+                return firstNumber * secondNumber;
+            default:
+                return 0;
+        }
     }
 }
