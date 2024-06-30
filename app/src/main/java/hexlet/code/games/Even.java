@@ -1,48 +1,47 @@
-package hexlet.code;
+package hexlet.code.games;
 
 import java.util.Scanner;
+import hexlet.code.Engine;
 
 public class Even {
 
     public static void startGame(Scanner scanner, String userName) {
 
-        // Правила игры
+        // Выводим правила игры "Проверка на чётность"
         System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
 
-        int attemptCount = 3; // всего 3 попытки
+        int attemptCount = Engine.getAttemptCount();
 
         // Если попытка успешная и попытки не закончились
         while (attemptCount > 0) {
 
-            // Получаем и выводим случайное число
-            int randomNumber = (int)(Math.random() * 100);
-            System.out.println("Question: " + randomNumber);
+            // Получаем случайное число
+            int randomNumber = Engine.getRandomNumber();
 
-            // Ожидаемый ответ
+            // Расчитываем ожидаемый ответ
             String expectedAnswer = randomNumber % 2 == 0 ? "yes" : "no";
 
-            // Предложение игроку ввести свой ответ
-            System.out.print("Your answer: ");
+            // Выводим вопрос игроку
+            Engine.showQuestion(randomNumber);
+
+            // Выводим предложение игроку ввести свой ответ
+            Engine.requestAnswer();
+
+            // Получаем ответ игрока
             String answer = scanner.next();
 
-            // Сравнение ответа игрока с ожидаемым ответом
-            if (answer.equals(expectedAnswer)) {
-                System.out.println("Correct!");
+            // Сравниваем ответ игрока с ожидаемым ответом
+            if (Engine.isCorrectAnswer(answer, expectedAnswer)) {
+                Engine.notifyCorrectAnswer();
             } else {
-                String wrongAnswer = "'" + answer
-                                    + "' is wrong answer ;(. Correct answer was '"
-                                    + expectedAnswer + "'.\n"
-                                    + "Let's try again, " + userName + "!";
-                System.out.println(wrongAnswer);
+                Engine.notifyWrongAnswer(answer, expectedAnswer, userName);
                 break;
             }
 
             attemptCount--;
         }
-
-        if (attemptCount == 0) {
-            System.out.println("Congratulations, " + userName + "!");
-        }
+        // Поздравляем с успешным окончанием игры
+        Engine.showCongratulation(attemptCount, userName);
 
     }
 }
