@@ -1,5 +1,8 @@
 package hexlet.code;
 
+import hexlet.code.games.Calc;
+import hexlet.code.games.Even;
+
 import java.util.Scanner;
 
 public class App {
@@ -12,6 +15,7 @@ public class App {
         String gameList = "Please enter the game number and press Enter.\n"
                         + "1 - Greet\n"
                         + "2 - Even\n"
+                        + "3 - Calc\n"
                         + "0 - Exit\n"
                         + "Your choice: ";
         System.out.print(gameList);
@@ -20,7 +24,7 @@ public class App {
         int gameNumber = scanner.nextInt();
 
         // Номер игры должен быть из списка, кроме 0
-        if (gameNumber > 0 && gameNumber < 3) {
+        if (gameNumber > 0 && gameNumber < 4) {
 
             // Приветствуем игрока и возвращаем его имя
             String userName = Cli.greet(scanner);
@@ -28,6 +32,9 @@ public class App {
             if (gameNumber == 2) {
                 // Игра "Проверка на чётность"
                 Even.startGame(scanner, userName);
+            } else if (gameNumber == 3) {
+                // Игра "Калькулятор"
+                Calc.startGame(scanner, userName);
             }
         }
 
