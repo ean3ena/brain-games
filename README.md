@@ -3,3 +3,5 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f946299d6078e0eb0111/maintainability)](https://codeclimate.com/github/ean3ena/java-project-61/maintainability)
 
 asciinema for step 5 - https://asciinema.org/a/iseXBZL8MftEUjqmn1cydcB7r
+
+asciinema for step 6 - https://asciinema.org/a/BDBfr7h3zDbqmFMN4NWRiiYeq
