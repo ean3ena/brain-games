@@ -9,3 +9,5 @@ asciinema for step 6 - https://asciinema.org/a/BDBfr7h3zDbqmFMN4NWRiiYeq
 asciinema for step 7 - https://asciinema.org/a/yfdKNewNjUUUWbC7AWWQ4y6jB
 
 asciinema for step 8 - https://asciinema.org/a/whTZEtPSg5FZl3N1Pl7oAFnSl
+
+asciinema for step 9 - https://asciinema.org/a/7wwx3cWuGmvtB9zkXu0SkQDMY
