@@ -55,7 +55,7 @@ public class Prime {
             return randomNumber == 2;
         }
 
-        for (int i = 3; i < Math.round(Math.sqrt(randomNumber)); i += 2) {
+        for (int i = 3; i < Math.round(Math.sqrt(randomNumber)) + 1; i += 2) {
             if (randomNumber % i == 0) {
                 return false;
             }
