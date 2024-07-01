@@ -16,11 +16,15 @@ public class GCD {
         // Если попытка успешная и попытки не закончились
         while (attemptCount > 0) {
 
+            // Диапазон генерации чисел (уменьшен для простоты вычислений)
+            int min = 1;
+            int max = 50;
+
             // Получаем первое случайное число
-            int firstRandomNumber = Engine.getRandomNumber();
+            int firstRandomNumber = Engine.getRandomNumber(min, max);
 
             // Получаем второе случайное число
-            int secondRandomNumber = Engine.getRandomNumber();
+            int secondRandomNumber = Engine.getRandomNumber(min, max);
 
             // Получаем ожидаемый ответ
             int expectedAnswer = calculateGCD(firstRandomNumber, secondRandomNumber);

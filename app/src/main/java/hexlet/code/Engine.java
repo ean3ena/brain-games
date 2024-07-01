@@ -7,10 +7,15 @@ public class Engine {
     }
 
     public static int getRandomNumber() {
-        // Диапазон генерации случайных чисел
-        int min = 1;
+        // Диапазон генерации случайных чисел по умолчанию
+        int min = 0;
         int max = 100;
 
+        int randomNumber = getRandomNumber(min, max);
+        return randomNumber;
+    }
+
+    public static int getRandomNumber(int min, int max) {
         int randomNumber = (int)(min + Math.random() * max);
         return randomNumber;
     }
