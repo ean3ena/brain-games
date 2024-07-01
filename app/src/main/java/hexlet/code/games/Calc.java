@@ -26,7 +26,7 @@ public class Calc {
             String randomTypeOperation = getRandomTypeOperation();
 
             // Расчитываем ожидаемый ответ
-            int expectedAnswer = calculateByTypeOperation(firstRandomNumber, secondRandomNumber,randomTypeOperation);
+            int expectedAnswer = calculateByTypeOperation(firstRandomNumber, secondRandomNumber, randomTypeOperation);
 
             // Выводим игроку вопрос и предложение ввести ответ
             String expressionForQuestion = firstRandomNumber + randomTypeOperation + secondRandomNumber;
@@ -61,16 +61,22 @@ public class Calc {
         // 31-60 - "-"
         // 61-100 - "*"
         int randomNumber = Engine.getRandomNumber();
+        final int min1 = 0;
+        final int max1 = 30;
+        final int min2 = 31;
+        final int max2 = 60;
+        final int min3 = 61;
+        final int max3 = 100;
 
         String typeOperation = "";
 
-        if (randomNumber >= 0 && randomNumber <= 30) {
+        if (randomNumber >= min1 && randomNumber <= max1) {
             // Операция "+"
             typeOperation = " + ";
-        } else if (randomNumber >= 31 && randomNumber <= 60) {
+        } else if (randomNumber >= min2 && randomNumber <= max2) {
             // Операция "-"
             typeOperation = " - ";
-        } else if (randomNumber >= 61 && randomNumber <= 100) {
+        } else if (randomNumber >= min3 && randomNumber <= max3) {
             // Операция "*"
             typeOperation = " * ";
         }

@@ -3,22 +3,20 @@ package hexlet.code;
 public class Engine {
 
     public static int getAttemptCount() {
-        int attemptCount = 3; // количество попыток в игре
+        final int attemptCount = 3; // количество попыток в игре
         return attemptCount;
     }
 
     public static int getRandomNumber() {
         // Диапазон генерации случайных чисел по умолчанию
         int min = 0;
-        int max = 100;
+        final int max = 100;
 
-        int randomNumber = getRandomNumber(min, max);
-        return randomNumber;
+        return getRandomNumber(min, max);
     }
 
     public static int getRandomNumber(int min, int max) {
-        int randomNumber = (int)(min + Math.random() * max);
-        return randomNumber;
+        return (int) (min + Math.random() * max);
     }
 
     public static void requestPlayerAnswer(String expression) {

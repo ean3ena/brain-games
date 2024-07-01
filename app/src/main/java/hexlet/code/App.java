@@ -1,7 +1,12 @@
 package hexlet.code;
 
 import java.util.Scanner;
-import hexlet.code.games.*;
+import hexlet.code.games.Even;
+import hexlet.code.games.Calc;
+import hexlet.code.games.GCD;
+import hexlet.code.games.Progression;
+import hexlet.code.games.Prime;
+
 
 public class App {
 
@@ -25,7 +30,8 @@ public class App {
         int gameNumber = scanner.nextInt();
 
         // Номер игры должен быть из списка, кроме 0
-        if (gameNumber > 0 && gameNumber < 7) {
+        int gameCount = 7;
+        if (gameNumber > 0 && gameNumber <= gameCount) {
 
             // Приветствуем игрока и возвращаем его имя
             String userName = Cli.greet(scanner);
@@ -50,6 +56,8 @@ public class App {
                 case 6:
                     // Игра "Простое ли число?"
                     Prime.startGame(scanner, userName);
+                    break;
+                default:
                     break;
             }
         }

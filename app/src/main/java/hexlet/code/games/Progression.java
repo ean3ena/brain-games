@@ -17,13 +17,18 @@ public class Progression {
         while (attemptCount > 0) {
 
             // Получаем случайное число в диапазоне от 1 до 50 - начало прогрессии
-            int start = Engine.getRandomNumber(1, 50);
+            int min = 1;
+            int max = 50;
+            int start = Engine.getRandomNumber(min, max);
 
             // Получаем случайное число в диапазоне от 1 до 5 - шаг прогрессии
-            int step = Engine.getRandomNumber(1, 5);
+            max = 5;
+            int step = Engine.getRandomNumber(min, max);
 
             // Получаем случайное число от 0 до 9 (длина прогрессии) - номер позиции спрятанного элемента
-            int position = Engine.getRandomNumber(0, 10);
+            min = 0;
+            max = 10;
+            int position = Engine.getRandomNumber(min, max);
 
             // Получаем ожидаемый ответ
             int expectedAnswer = calculateExpectedAnswer(start, step, position);
@@ -64,7 +69,8 @@ public class Progression {
         StringBuilder str = new StringBuilder();
 
         // Количество элементов в прогрессии - 10
-        for (int i = 0; i < 10; i++) {
+        int elementsCount = 10;
+        for (int i = 0; i < elementsCount; i++) {
 
             if (i != 0) {
                 str.append(" ");
