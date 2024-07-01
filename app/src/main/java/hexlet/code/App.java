@@ -1,11 +1,7 @@
 package hexlet.code;
 
-import hexlet.code.games.Calc;
-import hexlet.code.games.Even;
-import hexlet.code.games.GCD;
-import hexlet.code.games.Progression;
-
 import java.util.Scanner;
+import hexlet.code.games.*;
 
 public class App {
 
@@ -20,6 +16,7 @@ public class App {
                         + "3 - Calc\n"
                         + "4 - GCD\n"
                         + "5 - Progression\n"
+                        + "6 - Prime\n"
                         + "0 - Exit\n"
                         + "Your choice: ";
         System.out.print(gameList);
@@ -28,7 +25,7 @@ public class App {
         int gameNumber = scanner.nextInt();
 
         // Номер игры должен быть из списка, кроме 0
-        if (gameNumber > 0 && gameNumber < 6) {
+        if (gameNumber > 0 && gameNumber < 7) {
 
             // Приветствуем игрока и возвращаем его имя
             String userName = Cli.greet(scanner);
@@ -49,6 +46,10 @@ public class App {
                 case 5:
                     // Игра "Арифметическая прогрессия"
                     Progression.startGame(scanner, userName);
+                    break;
+                case 6:
+                    // Игра "Простое ли число?"
+                    Prime.startGame(scanner, userName);
                     break;
             }
         }
