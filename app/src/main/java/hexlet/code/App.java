@@ -29,36 +29,34 @@ public class App {
         // Пользователь вводит номер игры
         int gameNumber = scanner.nextInt();
 
+        final int even = 2;
+        final int calc = 3;
+        final int gcd = 4;
+        final int progression = 5;
+        final int prime = 6;
+
         // Номер игры должен быть из списка, кроме 0
-        int gameCount = 7;
+        final int gameCount = 7;
         if (gameNumber > 0 && gameNumber <= gameCount) {
 
             // Приветствуем игрока и возвращаем его имя
             String userName = Cli.greet(scanner);
 
-            switch (gameNumber) {
-                case 2:
-                    // Игра "Проверка на чётность"
-                    Even.startGame(scanner, userName);
-                    break;
-                case 3:
-                    // Игра "Калькулятор"
-                    Calc.startGame(scanner, userName);
-                    break;
-                case 4:
-                    // Игра "НОД"
-                    GCD.startGame(scanner, userName);
-                    break;
-                case 5:
-                    // Игра "Арифметическая прогрессия"
-                    Progression.startGame(scanner, userName);
-                    break;
-                case 6:
-                    // Игра "Простое ли число?"
-                    Prime.startGame(scanner, userName);
-                    break;
-                default:
-                    break;
+            if (gameNumber == even) {
+                // Игра "Проверка на чётность"
+                Even.startGame(scanner, userName);
+            } else if (gameNumber == calc) {
+                // Игра "Калькулятор"
+                Calc.startGame(scanner, userName);
+            } else if (gameNumber == gcd) {
+                // Игра "НОД"
+                GCD.startGame(scanner, userName);
+            } else if (gameNumber == progression) {
+                // Игра "Арифметическая прогрессия"
+                Progression.startGame(scanner, userName);
+            } else if (gameNumber == prime) {
+                // Игра "Простое ли число?"
+                Prime.startGame(scanner, userName);
             }
         }
 
