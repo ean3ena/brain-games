@@ -3,7 +3,8 @@ package hexlet.code;
 public class Engine {
 
     public static int getAttemptCount() {
-        return 3; // количество попыток в игре
+        int attemptCount = 3; // количество попыток в игре
+        return attemptCount;
     }
 
     public static int getRandomNumber() {
