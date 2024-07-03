@@ -1,60 +1,51 @@
 package hexlet.code;
 
+import java.util.Scanner;
+
 public class Engine {
 
-    public static int getAttemptCount() {
-        final int attemptCount = 3; // количество попыток в игре
-        return attemptCount;
-    }
+    final static int ATTEMPT_COUNT = 3;
 
-    public static int getRandomNumber() {
-        // Диапазон генерации случайных чисел по умолчанию
-        int min = 0;
-        final int max = 100;
+    public static void interactionWithPlayer(Scanner scanner, String userName, String rules, String[] expressions, String[] expectedAnswers) {
 
-        return getRandomNumber(min, max);
-    }
+        // Выводим правила игры
+        System.out.println(rules);
 
-    public static int getRandomNumber(int min, int max) {
-        return (int) (min + Math.random() * max);
-    }
+        boolean isPlayerAnswerCorrect = true;
 
-    public static void requestPlayerAnswer(String expression) {
-        System.out.println("Question: " + expression);
-        System.out.print("Your answer: ");
-    }
+        // Если попытка успешная и попытки не закончились
+        for (int i = 0; i < ATTEMPT_COUNT; i++) {
 
-    public static void requestPlayerAnswer(int expression) {
-        requestPlayerAnswer(Integer.toString(expression));
-    }
+            // Выводим вопрос игроку и просим ввести ответ
+            System.out.println("Question: " + expressions[i]);
+            System.out.print("Your answer: ");
 
-    public static boolean checkPlayerAnswer(String userName, String answer, String expectedAnswer) {
-        if (answer.equals(expectedAnswer)) {
-            notifyCorrectAnswer();
-            return true;
-        } else {
-            notifyWrongAnswer(answer, expectedAnswer, userName);
-            return false;
+            // Получаем ответ игрока
+            String answer = scanner.next();
+
+            // Сравниваем ответ игрока с ожидаемым ответом
+            // Если ответ неверный, то выводим сообщение и прекращаем игру
+            if (answer.equals(expectedAnswers[i])) {
+                System.out.println("Correct!");
+            } else {
+                String wrongAnswer = "'" + answer
+                        + "' is wrong answer ;(. Correct answer was '"
+                        + expectedAnswers[i] + "'.\n"
+                        + "Let's try again, " + userName + "!";
+                System.out.println(wrongAnswer);
+
+                isPlayerAnswerCorrect = false;
+                break;
+            }
+        }
+
+        // Поздравляем с успешным окончанием игры
+        if (isPlayerAnswerCorrect) {
+            System.out.println("Congratulations, " + userName + "!");
         }
     }
 
-    public static boolean checkPlayerAnswer(String userName, int answer, int expectedAnswer) {
-        return checkPlayerAnswer(userName, Integer.toString(answer), Integer.toString(expectedAnswer));
-    }
-
-    public static void notifyCorrectAnswer() {
-        System.out.println("Correct!");
-    }
-
-    public static void notifyWrongAnswer(String answer, String expectedAnswer, String userName) {
-        String wrongAnswer = "'" + answer
-                + "' is wrong answer ;(. Correct answer was '"
-                + expectedAnswer + "'.\n"
-                + "Let's try again, " + userName + "!";
-        System.out.println(wrongAnswer);
-    }
-
-    public static void showCongratulation(String userName) {
-        System.out.println("Congratulations, " + userName + "!");
+    public static String[] getNewEmptyArray() {
+        return new String[ATTEMPT_COUNT];
     }
 }

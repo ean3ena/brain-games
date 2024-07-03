@@ -1,56 +1,42 @@
 package hexlet.code.games;
 
-import java.util.Scanner;
 import hexlet.code.Engine;
+import hexlet.code.Util;
+import java.util.Scanner;
 
 public class GCD {
 
     public static void startGame(Scanner scanner, String userName) {
 
-        // Выводим правила игры "НОД"
-        System.out.println("Find the greatest common divisor of given numbers.");
+        // Правила игры "НОД"
+        String rules = "Find the greatest common divisor of given numbers.";
 
-        // Получаем количество попыток
-        int attemptCount = Engine.getAttemptCount();
+        // Массив выражений для вопроса игроку
+        String[] expressions = Engine.getNewEmptyArray();
+        // Массив ожидаемых от игрока ответов
+        String[] expectedAnswers = Engine.getNewEmptyArray();
 
-        // Если попытка успешная и попытки не закончились
-        while (attemptCount > 0) {
+        for (int i = 0; i < expressions.length; i++) {
 
             // Получаем первое случайное число
-            int firstRandomNumber = Engine.getRandomNumber();
+            int firstRandomNumber = Util.getRandomNumber();
 
             // Получаем второе случайное число
-            int secondRandomNumber = Engine.getRandomNumber();
+            int secondRandomNumber = Util.getRandomNumber();
 
-            // Получаем ожидаемый ответ
-            int expectedAnswer = calculateGCD(firstRandomNumber, secondRandomNumber);
-
-            // Выводим вопрос игроку и предложение ввести ответ
-            String expressionForQuestion = firstRandomNumber + " " + secondRandomNumber;
-            Engine.requestPlayerAnswer(expressionForQuestion);
-
-            // Получаем ответ игрока
-            int answer = scanner.nextInt();
-
-            // Сравниваем ответ игрока с ожидаемым ответом
-            boolean isPlayerAnswerCorrect = Engine.checkPlayerAnswer(userName, answer, expectedAnswer);
-
-            // Если ответ неверный, то прекращаем игру
-            if (!isPlayerAnswerCorrect) {
-                break;
-            }
-
-            attemptCount--;
+            // Заполняем массивы полученными значениями
+            expressions[i] = getExpression(firstRandomNumber, secondRandomNumber);
+            expectedAnswers[i] = getExpectedAnswer(firstRandomNumber, secondRandomNumber);
         }
 
-        // Поздравляем с успешным окончанием игры
-        if (attemptCount == 0) {
-            Engine.showCongratulation(userName);
-        }
-
+        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
     }
 
-    public static int calculateGCD(int firstNumber, int secondNumber) {
+    public static String getExpression(int firstNumber, int secondNumber) {
+        return firstNumber + " " + secondNumber;
+    }
+
+    public static String getExpectedAnswer(int firstNumber, int secondNumber) {
 
         // Алгоритм Евклида по нахождению НОД
         while (firstNumber != secondNumber) {
@@ -61,6 +47,6 @@ public class GCD {
             }
         }
 
-        return firstNumber;
+        return Integer.toString(firstNumber);
     }
 }

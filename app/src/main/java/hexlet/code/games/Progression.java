@@ -1,71 +1,47 @@
 package hexlet.code.games;
 
-import java.util.Scanner;
 import hexlet.code.Engine;
+import hexlet.code.Util;
+import java.util.Scanner;
 
 public class Progression {
 
     public static void startGame(Scanner scanner, String userName) {
 
-        // Выводим правила игры "Арифметическая прогрессия"
-        System.out.println("What number is missing in the progression?");
+        // Правила игры "Арифметическая прогрессия"
+        String rules = "What number is missing in the progression?";
 
-        // Получаем количество попыток
-        int attemptCount = Engine.getAttemptCount();
+        // Массив выражений для вопроса игроку
+        String[] expressions = Engine.getNewEmptyArray();
+        // Массив ожидаемых от игрока ответов
+        String[] expectedAnswers = Engine.getNewEmptyArray();
 
-        // Если попытка успешная и попытки не закончились
-        while (attemptCount > 0) {
+        for (int i = 0; i < expressions.length; i++) {
 
             // Получаем случайное число в диапазоне от 1 до 50 - начало прогрессии
-            final int min1 = 1;
-            final int max1 = 50;
-            int start = Engine.getRandomNumber(min1, max1);
+            int minRangeStartProgression = 1;
+            int maxRangeStartProgression = 50;
+            int start = Util.getRandomNumber(minRangeStartProgression, maxRangeStartProgression);
 
             // Получаем случайное число в диапазоне от 1 до 5 - шаг прогрессии
-            final int min2 = 1;
-            final int max2 = 5;
-            int step = Engine.getRandomNumber(min2, max2);
+            int minRangeStepProgression = 1;
+            int maxRangeStepProgression = 5;
+            int step = Util.getRandomNumber(minRangeStepProgression, maxRangeStepProgression);
 
             // Получаем случайное число от 0 до 9 (длина прогрессии) - номер позиции спрятанного элемента
-            final int min3 = 0;
-            final int max3 = 10;
-            int position = Engine.getRandomNumber(min3, max3);
+            int minRangePosition = 0;
+            int maxRangePosition = 10;
+            int position = Util.getRandomNumber(minRangePosition, maxRangePosition);
 
-            // Получаем ожидаемый ответ
-            int expectedAnswer = calculateExpectedAnswer(start, step, position);
-
-            // Формируем выражение для вопроса
-            String expressionForQuestion = generateExpression(start, step, position);
-
-            // Выводим вопрос игроку и предложение ввести ответ
-            Engine.requestPlayerAnswer(expressionForQuestion);
-
-            // Получаем ответ игрока
-            int answer = scanner.nextInt();
-
-            // Сравниваем ответ игрока с ожидаемым ответом
-            boolean isPlayerAnswerCorrect = Engine.checkPlayerAnswer(userName, answer, expectedAnswer);
-
-            // Если ответ неверный, то прекращаем игру
-            if (!isPlayerAnswerCorrect) {
-                break;
-            }
-
-            attemptCount--;
+            // Заполняем массивы расчетными данными
+            expressions[i] = getExpression(start, step, position);
+            expectedAnswers[i] = getExpectedAnswer(start, step, position);
         }
 
-        // Поздравляем с успешным окончанием игры
-        if (attemptCount == 0) {
-            Engine.showCongratulation(userName);
-        }
-
+        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
     }
 
-    public static int calculateExpectedAnswer(int start, int step, int position) {
-        return start + step * position;
-    }
-
-    public static String generateExpression(int start, int step, int position) {
+    public static String getExpression(int start, int step, int position) {
 
         StringBuilder str = new StringBuilder();
 
@@ -87,5 +63,10 @@ public class Progression {
         }
 
         return str.toString();
+    }
+
+    public static String getExpectedAnswer(int start, int step, int position) {
+        int result = start + step * position;
+        return Integer.toString(result);
     }
 }

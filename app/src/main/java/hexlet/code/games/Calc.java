@@ -1,56 +1,38 @@
 package hexlet.code.games;
 
-import java.util.Scanner;
 import hexlet.code.Engine;
+import hexlet.code.Util;
+import java.util.Scanner;
 
 public class Calc {
 
     public static void startGame(Scanner scanner, String userName) {
 
-        // Выводим правила игры "Калькулятор"
-        System.out.println("What is the result of the expression?");
+        // Правила игры "Калькулятор"
+        String rules = "What is the result of the expression?";
 
-        // Получаем количество попыток
-        int attemptCount = Engine.getAttemptCount();
+        // Массив выражений для вопроса игроку
+        String[] expressions = Engine.getNewEmptyArray();
+        // Массив ожидаемых от игрока ответов
+        String[] expectedAnswers = Engine.getNewEmptyArray();
 
-        // Если попытка успешная и попытки не закончились
-        while (attemptCount > 0) {
+        for (int i = 0; i < expressions.length; i++) {
 
-            // Получаем первое случайное число
-            int firstRandomNumber = Engine.getRandomNumber();
+            // Получаем первое случайное число для выражения
+            int firstRandomNumber = Util.getRandomNumber();
 
-            // Получаем второе случайное число
-            int secondRandomNumber = Engine.getRandomNumber();
+            // Получаем второе случайное число для выражения
+            int secondRandomNumber = Util.getRandomNumber();
 
-            // Расчитываем тип операции по случайному числу
+            // Получаем случайный тип операции
             String randomTypeOperation = getRandomTypeOperation();
 
-            // Расчитываем ожидаемый ответ
-            int expectedAnswer = calculateByTypeOperation(firstRandomNumber, secondRandomNumber, randomTypeOperation);
-
-            // Выводим игроку вопрос и предложение ввести ответ
-            String expressionForQuestion = firstRandomNumber + randomTypeOperation + secondRandomNumber;
-            Engine.requestPlayerAnswer(expressionForQuestion);
-
-            // Получаем ответ игрока
-            int answer = scanner.nextInt();
-
-            // Сравниваем ответ игрока с ожидаемым ответом
-            boolean isPlayerAnswerCorrect = Engine.checkPlayerAnswer(userName, answer, expectedAnswer);
-
-            // Если ответ неверный, то прекращаем игру
-            if (!isPlayerAnswerCorrect) {
-                break;
-            }
-
-            attemptCount--;
+            // Заполняем массивы полученными значениями
+            expressions[i] = getExpression(firstRandomNumber, secondRandomNumber, randomTypeOperation);
+            expectedAnswers[i] = getExpectedAnswer(firstRandomNumber, secondRandomNumber, randomTypeOperation);
         }
 
-        // Если все попытки успешные, то поздравляем с успешным окончанием игры
-        if (attemptCount == 0) {
-            Engine.showCongratulation(userName);
-        }
-
+        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
     }
 
     public static String getRandomTypeOperation() {
@@ -60,40 +42,50 @@ public class Calc {
         // 0-30 - "+"
         // 31-60 - "-"
         // 61-100 - "*"
-        int randomNumber = Engine.getRandomNumber();
-        final int min1 = 0;
-        final int max1 = 30;
-        final int min2 = 31;
-        final int max2 = 60;
-        final int min3 = 61;
-        final int max3 = 100;
+        final int MIN_RANGE_ADDITION = 0;
+        final int MAX_RANGE_ADDITION = 30;
+        final int MIN_RANGE_SUBTRACTION = 31;
+        final int MAX_RANGE_SUBTRACTION = 60;
+        final int MIN_RANGE_MULTIPLICATION = 61;
+        final int MAX_RANGE_MULTIPLICATION = 100;
+
+        int randomNumber = Util.getRandomNumber();
 
         String typeOperation = "";
 
-        if (randomNumber >= min1 && randomNumber <= max1) {
+        if (randomNumber >= MIN_RANGE_ADDITION && randomNumber <= MAX_RANGE_ADDITION) {
             // Операция "+"
             typeOperation = " + ";
-        } else if (randomNumber >= min2 && randomNumber <= max2) {
+        } else if (randomNumber >= MIN_RANGE_SUBTRACTION && randomNumber <= MAX_RANGE_SUBTRACTION) {
             // Операция "-"
             typeOperation = " - ";
-        } else if (randomNumber >= min3 && randomNumber <= max3) {
+        } else if (randomNumber >= MIN_RANGE_MULTIPLICATION && randomNumber <= MAX_RANGE_MULTIPLICATION) {
             // Операция "*"
             typeOperation = " * ";
         }
         return typeOperation;
     }
 
-    public static int calculateByTypeOperation(int firstNumber, int secondNumber, String operation) {
+    public static String getExpression(int firstNumber, int secondNumber, String typeOperation) {
+        return firstNumber + typeOperation + secondNumber;
+    }
 
-        switch (operation) {
+    public static String getExpectedAnswer(int firstNumber, int secondNumber, String typeOperation) {
+
+        int result = 0;
+
+        switch (typeOperation) {
             case " + ":
-                return firstNumber + secondNumber;
+                result = firstNumber + secondNumber;
+                break;
             case " - ":
-                return firstNumber - secondNumber;
+                result = firstNumber - secondNumber;
+                break;
             case " * ":
-                return firstNumber * secondNumber;
-            default:
-                return 0;
+                result = firstNumber * secondNumber;
+                break;
         }
+
+        return Integer.toString(result);
     }
 }

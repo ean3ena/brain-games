@@ -1,48 +1,36 @@
 package hexlet.code.games;
 
-import java.util.Scanner;
 import hexlet.code.Engine;
+import hexlet.code.Util;
+import java.util.Scanner;
 
 public class Prime {
 
     public static void startGame(Scanner scanner, String userName) {
 
-        // Выводим правила игры "Простое ли число?"
-        System.out.println("Answer 'yes' if given number is prime. Otherwise answer 'no'.");
+        // Правила игры "Простое ли число?"
+        String rules = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
-        int attemptCount = Engine.getAttemptCount();
+        // Массив выражений для вопроса игроку
+        String[] expressions = Engine.getNewEmptyArray();
+        // Массив ожидаемых от игрока ответов
+        String[] expectedAnswers = Engine.getNewEmptyArray();
 
-        // Если попытка успешная и попытки не закончились
-        while (attemptCount > 0) {
+        for (int i = 0; i < expressions.length; i++) {
 
-            // Получаем случайное число
-            int randomNumber = Engine.getRandomNumber();
+            // Получаем случайное число для выражения
+            int randomNumber = Util.getRandomNumber();
 
-            // Расчитываем ожидаемый ответ
-            String expectedAnswer = getExpectedAnswer(randomNumber);
-
-            // Выводим вопрос игроку и предложение ввести ответ
-            Engine.requestPlayerAnswer(randomNumber);
-
-            // Получаем ответ игрока
-            String answer = scanner.next();
-
-            // Сравниваем ответ игрока с ожидаемым ответом
-            boolean isPlayerAnswerCorrect = Engine.checkPlayerAnswer(userName, answer, expectedAnswer);
-
-            // Если ответ неверный, то прекращаем игру
-            if (!isPlayerAnswerCorrect) {
-                break;
-            }
-
-            attemptCount--;
+            // Заполняем массивы расчетными данными
+            expressions[i] = getExpression(randomNumber);
+            expectedAnswers[i] = getExpectedAnswer(randomNumber);
         }
 
-        // Поздравляем с успешным окончанием игры
-        if (attemptCount == 0) {
-            Engine.showCongratulation(userName);
-        }
+        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
+    }
 
+    public static String getExpression(int number) {
+        return Integer.toString(number);
     }
 
     public static String getExpectedAnswer(int randomNumber) {
