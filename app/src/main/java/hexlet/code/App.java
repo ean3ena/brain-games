@@ -12,23 +12,23 @@ public class App {
 
     public static void main(String[] args) {
 
-        final int GAME_EXIT_NUMBER = 0;
-        final int GAME_GREET_NUMBER = 1;
-        final int GAME_EVEN_NUMBER = 2;
-        final int GAME_CALC_NUMBER = 3;
-        final int GAME_GCD_NUMBER = 4;
-        final int GAME_PROGRESSION_NUMBER = 5;
-        final int GAME_PRIME_NUMBER = 6;
+        final int numberGameExit = 0;
+        final int numberGameGreet = 1;
+        final int numberGameEven = 2;
+        final int numberGameCalc = 3;
+        final int numberGameGcd = 4;
+        final int numberGameProgression = 5;
+        final int numberGamePrime = 6;
 
         // Выводим список игр с предложением выбрать игру
         String gameList = "Please enter the game number and press Enter.\n"
-                + GAME_GREET_NUMBER + " - Greet\n"
-                + GAME_EVEN_NUMBER + " - Even\n"
-                + GAME_CALC_NUMBER + " - Calc\n"
-                + GAME_GCD_NUMBER + " - GCD\n"
-                + GAME_PROGRESSION_NUMBER + " - Progression\n"
-                + GAME_PRIME_NUMBER + " - Prime\n"
-                + GAME_EXIT_NUMBER + " - Exit\n"
+                + numberGameGreet + " - Greet\n"
+                + numberGameEven + " - Even\n"
+                + numberGameCalc + " - Calc\n"
+                + numberGameGcd + " - GCD\n"
+                + numberGameProgression + " - Progression\n"
+                + numberGamePrime + " - Prime\n"
+                + numberGameExit + " - Exit\n"
                 + "Your choice: ";
         System.out.print(gameList);
 
@@ -38,31 +38,33 @@ public class App {
         int gameNumber = scanner.nextInt();
 
         // Номер игры должен быть из списка, не включая игру Exit
-        if (gameNumber > GAME_EXIT_NUMBER && gameNumber <= GAME_PRIME_NUMBER) {
+        if (gameNumber > numberGameExit && gameNumber <= numberGamePrime) {
 
             // Приветствуем игрока и возвращаем его имя
             String userName = Cli.greet(scanner);
 
             switch (gameNumber) {
-                case GAME_EVEN_NUMBER:
+                case numberGameEven:
                     // Игра "Проверка на чётность"
                     Even.startGame(scanner, userName);
                     break;
-                case GAME_CALC_NUMBER:
+                case numberGameCalc:
                     // Игра "Калькулятор"
                     Calc.startGame(scanner, userName);
                     break;
-                case GAME_GCD_NUMBER:
+                case numberGameGcd:
                     // Игра "НОД"
                     GCD.startGame(scanner, userName);
                     break;
-                case GAME_PROGRESSION_NUMBER:
+                case numberGameProgression:
                     // Игра "Арифметическая прогрессия"
                     Progression.startGame(scanner, userName);
                     break;
-                case GAME_PRIME_NUMBER:
+                case numberGamePrime:
                     // Игра "Простое ли число?"
                     Prime.startGame(scanner, userName);
+                default:
+                    //
             }
         }
         scanner.close();

@@ -4,9 +4,8 @@ import java.util.Scanner;
 
 public class Engine {
 
-    final static int ATTEMPT_COUNT = 3;
-
-    public static void interactionWithPlayer(Scanner scanner, String userName, String rules, String[] expressions, String[] expectedAnswers) {
+    public static void interactionWithPlayer(Scanner scanner, String userName, String rules,
+                                             String[] expressions, String[] expectedAnswers) {
 
         // Выводим правила игры
         System.out.println(rules);
@@ -14,7 +13,7 @@ public class Engine {
         boolean isPlayerAnswerCorrect = true;
 
         // Если попытка успешная и попытки не закончились
-        for (int i = 0; i < ATTEMPT_COUNT; i++) {
+        for (int i = 0; i < getAttemptCount(); i++) {
 
             // Выводим вопрос игроку и просим ввести ответ
             System.out.println("Question: " + expressions[i]);
@@ -46,6 +45,11 @@ public class Engine {
     }
 
     public static String[] getNewEmptyArray() {
-        return new String[ATTEMPT_COUNT];
+        return new String[getAttemptCount()];
+    }
+
+    public static int getAttemptCount() {
+        final int attemptCount = 3;
+        return attemptCount;
     }
 }

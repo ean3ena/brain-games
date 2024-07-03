@@ -4,10 +4,10 @@ public class Util {
 
     public static int getRandomNumber() {
         // Диапазон генерации случайных чисел по умолчанию
-        final int MIN_RANGE = 0;
-        final int MAX_RANGE = 100;
+        final int minRange = 0;
+        final int maxRange = 100;
 
-        return getRandomNumber(MIN_RANGE, MAX_RANGE);
+        return getRandomNumber(minRange, maxRange);
     }
 
     public static int getRandomNumber(int min, int max) {

@@ -42,24 +42,24 @@ public class Calc {
         // 0-30 - "+"
         // 31-60 - "-"
         // 61-100 - "*"
-        final int MIN_RANGE_ADDITION = 0;
-        final int MAX_RANGE_ADDITION = 30;
-        final int MIN_RANGE_SUBTRACTION = 31;
-        final int MAX_RANGE_SUBTRACTION = 60;
-        final int MIN_RANGE_MULTIPLICATION = 61;
-        final int MAX_RANGE_MULTIPLICATION = 100;
+        final int minRangeAddition = 0;
+        final int maxRangeAddition = 30;
+        final int minRangeSubstraction = 31;
+        final int maxRangeSubstraction = 60;
+        final int minRangeMultiplication = 61;
+        final int maxRangeMultiplication = 100;
 
         int randomNumber = Util.getRandomNumber();
 
         String typeOperation = "";
 
-        if (randomNumber >= MIN_RANGE_ADDITION && randomNumber <= MAX_RANGE_ADDITION) {
+        if (randomNumber >= minRangeAddition && randomNumber <= maxRangeAddition) {
             // Операция "+"
             typeOperation = " + ";
-        } else if (randomNumber >= MIN_RANGE_SUBTRACTION && randomNumber <= MAX_RANGE_SUBTRACTION) {
+        } else if (randomNumber >= minRangeSubstraction && randomNumber <= maxRangeSubstraction) {
             // Операция "-"
             typeOperation = " - ";
-        } else if (randomNumber >= MIN_RANGE_MULTIPLICATION && randomNumber <= MAX_RANGE_MULTIPLICATION) {
+        } else if (randomNumber >= minRangeMultiplication && randomNumber <= maxRangeMultiplication) {
             // Операция "*"
             typeOperation = " * ";
         }
@@ -72,7 +72,7 @@ public class Calc {
 
     public static String getExpectedAnswer(int firstNumber, int secondNumber, String typeOperation) {
 
-        int result = 0;
+        int result;
 
         switch (typeOperation) {
             case " + ":
@@ -84,6 +84,8 @@ public class Calc {
             case " * ":
                 result = firstNumber * secondNumber;
                 break;
+            default:
+                result = 0;
         }
 
         return Integer.toString(result);
