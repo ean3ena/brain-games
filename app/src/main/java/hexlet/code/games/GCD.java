@@ -16,13 +16,16 @@ public class GCD {
         // Массив ожидаемых от игрока ответов
         String[] expectedAnswers = Engine.getNewEmptyArray();
 
+        final int minRange = 1;
+        final int maxRange = 100;
+
         for (int i = 0; i < expressions.length; i++) {
 
             // Получаем первое случайное число
-            int firstRandomNumber = Util.getRandomNumber();
+            int firstRandomNumber = Util.getRandomNumber(minRange, maxRange);
 
             // Получаем второе случайное число
-            int secondRandomNumber = Util.getRandomNumber();
+            int secondRandomNumber = Util.getRandomNumber(minRange, maxRange);
 
             // Заполняем массивы полученными значениями
             expressions[i] = getExpression(firstRandomNumber, secondRandomNumber);
