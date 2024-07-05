@@ -2,39 +2,28 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Util;
-import java.util.Scanner;
 
 public class Prime {
 
-    public static void startGame(Scanner scanner, String userName) {
+    public static void startGame() {
 
         // Правила игры "Простое ли число?"
         String rules = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
-        // Массив выражений для вопроса игроку
-        String[] expressions = Engine.getNewEmptyArray();
-        // Массив ожидаемых от игрока ответов
-        String[] expectedAnswers = Engine.getNewEmptyArray();
+        // Массив вопросов и ответов
+        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][Engine.ATTEMPT_COUNT - 1];
 
-        for (int i = 0; i < expressions.length; i++) {
+        for (int i = 0; i < questionsAndAnswers.length; i++) {
 
             // Получаем случайное число для выражения
             int randomNumber = Util.getRandomNumber();
 
             // Заполняем массивы расчетными данными
-            expressions[i] = getExpression(randomNumber);
-            expectedAnswers[i] = getExpectedAnswer(randomNumber);
+            questionsAndAnswers[i][0] = Integer.toString(randomNumber);
+            questionsAndAnswers[i][1] = isPrime(randomNumber) ? "yes" : "no";
         }
 
-        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
-    }
-
-    public static String getExpression(int number) {
-        return Integer.toString(number);
-    }
-
-    public static String getExpectedAnswer(int randomNumber) {
-        return isPrime(randomNumber) ? "yes" : "no";
+        Engine.interactionWithPlayer(rules, questionsAndAnswers);
     }
 
     public static boolean isPrime(int randomNumber) {

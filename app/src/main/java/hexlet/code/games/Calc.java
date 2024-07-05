@@ -2,21 +2,18 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Util;
-import java.util.Scanner;
 
 public class Calc {
 
-    public static void startGame(Scanner scanner, String userName) {
+    public static void startGame() {
 
         // Правила игры "Калькулятор"
         String rules = "What is the result of the expression?";
 
-        // Массив выражений для вопроса игроку
-        String[] expressions = Engine.getNewEmptyArray();
-        // Массив ожидаемых от игрока ответов
-        String[] expectedAnswers = Engine.getNewEmptyArray();
+        // Массив вопросов и ответов
+        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][Engine.ATTEMPT_COUNT - 1];
 
-        for (int i = 0; i < expressions.length; i++) {
+        for (int i = 0; i < questionsAndAnswers.length; i++) {
 
             // Получаем первое случайное число для выражения
             int firstRandomNumber = Util.getRandomNumber();
@@ -27,12 +24,12 @@ public class Calc {
             // Получаем случайный тип операции
             String randomTypeOperation = getRandomTypeOperation();
 
-            // Заполняем массивы полученными значениями
-            expressions[i] = getExpression(firstRandomNumber, secondRandomNumber, randomTypeOperation);
-            expectedAnswers[i] = getExpectedAnswer(firstRandomNumber, secondRandomNumber, randomTypeOperation);
+            // Заполняем массив полученными значениями
+            questionsAndAnswers[i][0] = firstRandomNumber + randomTypeOperation + secondRandomNumber;
+            questionsAndAnswers[i][1] = getExpectedAnswer(firstRandomNumber, secondRandomNumber, randomTypeOperation);
         }
 
-        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
+        Engine.interactionWithPlayer(rules, questionsAndAnswers);
     }
 
     public static String getRandomTypeOperation() {
@@ -66,27 +63,14 @@ public class Calc {
         return typeOperation;
     }
 
-    public static String getExpression(int firstNumber, int secondNumber, String typeOperation) {
-        return firstNumber + typeOperation + secondNumber;
-    }
-
     public static String getExpectedAnswer(int firstNumber, int secondNumber, String typeOperation) {
 
-        int result;
-
-        switch (typeOperation) {
-            case " + ":
-                result = firstNumber + secondNumber;
-                break;
-            case " - ":
-                result = firstNumber - secondNumber;
-                break;
-            case " * ":
-                result = firstNumber * secondNumber;
-                break;
-            default:
-                result = 0;
-        }
+        int result = switch (typeOperation) {
+            case " + " -> firstNumber + secondNumber;
+            case " - " -> firstNumber - secondNumber;
+            case " * " -> firstNumber * secondNumber;
+            default -> 0;
+        };
 
         return Integer.toString(result);
     }

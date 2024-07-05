@@ -4,8 +4,21 @@ import java.util.Scanner;
 
 public class Engine {
 
-    public static void interactionWithPlayer(Scanner scanner, String userName, String rules,
-                                             String[] expressions, String[] expectedAnswers) {
+    public static final int ATTEMPT_COUNT = 3;
+
+    public static void interactionWithPlayer(String rules, String[][] questionsAndAnswers) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        String firstGreeting = """
+
+                Welcome to the Brain Games!
+                May I have your name?\s""";
+        System.out.print(firstGreeting);
+
+        String userName = scanner.next();
+
+        System.out.println("Hello, " + userName + "!");
 
         // Выводим правила игры
         System.out.println(rules);
@@ -13,10 +26,10 @@ public class Engine {
         boolean isPlayerAnswerCorrect = true;
 
         // Если попытка успешная и попытки не закончились
-        for (int i = 0; i < getAttemptCount(); i++) {
+        for (int i = 0; i < ATTEMPT_COUNT; i++) {
 
             // Выводим вопрос игроку и просим ввести ответ
-            System.out.println("Question: " + expressions[i]);
+            System.out.println("Question: " + questionsAndAnswers[i][0]);
             System.out.print("Your answer: ");
 
             // Получаем ответ игрока
@@ -24,12 +37,12 @@ public class Engine {
 
             // Сравниваем ответ игрока с ожидаемым ответом
             // Если ответ неверный, то выводим сообщение и прекращаем игру
-            if (answer.equals(expectedAnswers[i])) {
+            if (answer.equals(questionsAndAnswers[i][1])) {
                 System.out.println("Correct!");
             } else {
                 String wrongAnswer = "'" + answer
                         + "' is wrong answer ;(. Correct answer was '"
-                        + expectedAnswers[i] + "'.\n"
+                        + questionsAndAnswers[i][1] + "'.\n"
                         + "Let's try again, " + userName + "!";
                 System.out.println(wrongAnswer);
 
@@ -42,14 +55,5 @@ public class Engine {
         if (isPlayerAnswerCorrect) {
             System.out.println("Congratulations, " + userName + "!");
         }
-    }
-
-    public static String[] getNewEmptyArray() {
-        return new String[getAttemptCount()];
-    }
-
-    public static int getAttemptCount() {
-        final int attemptCount = 3;
-        return attemptCount;
     }
 }

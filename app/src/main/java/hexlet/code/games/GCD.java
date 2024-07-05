@@ -2,24 +2,21 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Util;
-import java.util.Scanner;
 
 public class GCD {
 
-    public static void startGame(Scanner scanner, String userName) {
+    public static void startGame() {
 
         // Правила игры "НОД"
         String rules = "Find the greatest common divisor of given numbers.";
 
-        // Массив выражений для вопроса игроку
-        String[] expressions = Engine.getNewEmptyArray();
-        // Массив ожидаемых от игрока ответов
-        String[] expectedAnswers = Engine.getNewEmptyArray();
+        // Массив вопросов и ответов
+        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][Engine.ATTEMPT_COUNT - 1];
 
         final int minRange = 1;
         final int maxRange = 100;
 
-        for (int i = 0; i < expressions.length; i++) {
+        for (int i = 0; i < questionsAndAnswers.length; i++) {
 
             // Получаем первое случайное число
             int firstRandomNumber = Util.getRandomNumber(minRange, maxRange);
@@ -28,15 +25,11 @@ public class GCD {
             int secondRandomNumber = Util.getRandomNumber(minRange, maxRange);
 
             // Заполняем массивы полученными значениями
-            expressions[i] = getExpression(firstRandomNumber, secondRandomNumber);
-            expectedAnswers[i] = getExpectedAnswer(firstRandomNumber, secondRandomNumber);
+            questionsAndAnswers[i][0] = firstRandomNumber + " " + secondRandomNumber;
+            questionsAndAnswers[i][1] = getExpectedAnswer(firstRandomNumber, secondRandomNumber);
         }
 
-        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
-    }
-
-    public static String getExpression(int firstNumber, int secondNumber) {
-        return firstNumber + " " + secondNumber;
+        Engine.interactionWithPlayer(rules, questionsAndAnswers);
     }
 
     public static String getExpectedAnswer(int firstNumber, int secondNumber) {

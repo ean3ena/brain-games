@@ -2,21 +2,18 @@ package hexlet.code.games;
 
 import hexlet.code.Engine;
 import hexlet.code.Util;
-import java.util.Scanner;
 
 public class Progression {
 
-    public static void startGame(Scanner scanner, String userName) {
+    public static void startGame() {
 
         // Правила игры "Арифметическая прогрессия"
         String rules = "What number is missing in the progression?";
 
-        // Массив выражений для вопроса игроку
-        String[] expressions = Engine.getNewEmptyArray();
-        // Массив ожидаемых от игрока ответов
-        String[] expectedAnswers = Engine.getNewEmptyArray();
+        // Массив вопросов и ответов
+        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][Engine.ATTEMPT_COUNT - 1];
 
-        for (int i = 0; i < expressions.length; i++) {
+        for (int i = 0; i < questionsAndAnswers.length; i++) {
 
             // Получаем случайное число в диапазоне от 1 до 50 - начало прогрессии
             final int minRangeStartProgression = 1;
@@ -34,35 +31,32 @@ public class Progression {
             int position = Util.getRandomNumber(minRangePosition, maxRangePosition);
 
             // Заполняем массивы расчетными данными
-            expressions[i] = getExpression(start, step, position);
-            expectedAnswers[i] = getExpectedAnswer(start, step, position);
+            questionsAndAnswers[i][0] = getExpression(start, step, position);
+            questionsAndAnswers[i][1] = getExpectedAnswer(start, step, position);
         }
 
-        Engine.interactionWithPlayer(scanner, userName, rules, expressions, expectedAnswers);
+        Engine.interactionWithPlayer(rules, questionsAndAnswers);
     }
 
     public static String getExpression(int start, int step, int position) {
 
-        StringBuilder str = new StringBuilder();
-
         // Количество элементов в прогрессии - 10
         final int elementsCount = 10;
+
+        String[] tmpArray = new String[elementsCount];
+
         for (int i = 0; i < elementsCount; i++) {
 
-            if (i != 0) {
-                str.append(" ");
-            }
-
             if (i == position) {
-                str.append("..");
+                tmpArray[i] = "..";
             } else {
-                str.append(start);
+                tmpArray[i] = Integer.toString(start);
             }
 
             start += step;
         }
 
-        return str.toString();
+        return String.join(" ", tmpArray);
     }
 
     public static String getExpectedAnswer(int start, int step, int position) {
