@@ -23,8 +23,6 @@ public class Engine {
         // Выводим правила игры
         System.out.println(rules);
 
-        boolean isPlayerAnswerCorrect = true;
-
         // Если попытка успешная и попытки не закончились
         for (int i = 0; i < ATTEMPT_COUNT; i++) {
 
@@ -45,15 +43,12 @@ public class Engine {
                         + questionsAndAnswers[i][1] + "'.\n"
                         + "Let's try again, " + userName + "!";
                 System.out.println(wrongAnswer);
-
-                isPlayerAnswerCorrect = false;
-                break;
+                // Выходим из метода
+                return;
             }
         }
 
         // Поздравляем с успешным окончанием игры
-        if (isPlayerAnswerCorrect) {
-            System.out.println("Congratulations, " + userName + "!");
-        }
+        System.out.println("Congratulations, " + userName + "!");
     }
 }
