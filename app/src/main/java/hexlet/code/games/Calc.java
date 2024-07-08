@@ -10,7 +10,7 @@ public class Calc {
 
         String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][2];
 
-        final int operationCount= 3;
+        final int operationCount = 3;
         String[] operations = new String[operationCount];
         operations[0] = "+";
         operations[1] = "-";
