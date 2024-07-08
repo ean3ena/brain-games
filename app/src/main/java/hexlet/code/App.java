@@ -9,10 +9,8 @@ import hexlet.code.games.Prime;
 
 
 public class App {
-
     public static void main(String[] args) {
 
-        // Выводим список игр с предложением выбрать игру
         String gameList = """
                 Please enter the game number and press Enter.
                 1 - Greet
@@ -27,9 +25,7 @@ public class App {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Пользователь вводит номер игры
         String gameNumber = scanner.next();
-
         switch (gameNumber) {
             case "1" -> Cli.greet(); // Приветствие
             case "2" -> Even.startGame(); // Игра "Проверка на чётность"

@@ -4,37 +4,25 @@ import hexlet.code.Engine;
 import hexlet.code.Util;
 
 public class GCD {
-
     public static void startGame() {
 
-        // Правила игры "НОД"
         String rules = "Find the greatest common divisor of given numbers.";
 
-        // Массив вопросов и ответов
         String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][2];
 
-        final int minRange = 1;
-        final int maxRange = 100;
+        final int min = 1;
+        final int max = 100;
 
         for (int i = 0; i < questionsAndAnswers.length; i++) {
-
-            // Получаем первое случайное число
-            int firstRandomNumber = Util.getRandomNumber(minRange, maxRange);
-
-            // Получаем второе случайное число
-            int secondRandomNumber = Util.getRandomNumber(minRange, maxRange);
-
-            // Заполняем массивы полученными значениями
+            int firstRandomNumber = Util.getRandomNumber(min, max);
+            int secondRandomNumber = Util.getRandomNumber(min, max);
             questionsAndAnswers[i][0] = firstRandomNumber + " " + secondRandomNumber;
             questionsAndAnswers[i][1] = getExpectedAnswer(firstRandomNumber, secondRandomNumber);
         }
-
         Engine.interactionWithPlayer(rules, questionsAndAnswers);
     }
 
-    public static String getExpectedAnswer(int firstNumber, int secondNumber) {
-
-        // Алгоритм Евклида по нахождению НОД
+    private static String getExpectedAnswer(int firstNumber, int secondNumber) {
         while (firstNumber != secondNumber) {
             if (firstNumber > secondNumber) {
                 firstNumber -= secondNumber;
@@ -42,7 +30,6 @@ public class GCD {
                 secondNumber -= firstNumber;
             }
         }
-
         return Integer.toString(firstNumber);
     }
 }

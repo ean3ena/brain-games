@@ -2,12 +2,36 @@
 [![Actions Status](https://github.com/ean3ena/java-project-61/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ean3ena/java-project-61/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f946299d6078e0eb0111/maintainability)](https://codeclimate.com/github/ean3ena/java-project-61/maintainability)
 
-asciinema for step 5 - https://asciinema.org/a/iseXBZL8MftEUjqmn1cydcB7r
+## Описание
+«Игры разума» — набор из пяти консольных игр, построенных по принципу популярных мобильных приложений
+для прокачки мозга. Каждая игра задает вопросы, на которые нужно дать правильные ответы. После трех
+правильных ответов считается, что игра пройдена. Неправильные ответы завершают игру и предлагают пройти
+ее заново.
 
-asciinema for step 6 - https://asciinema.org/a/BDBfr7h3zDbqmFMN4NWRiiYeq
+Игры:
 
-asciinema for step 7 - https://asciinema.org/a/yfdKNewNjUUUWbC7AWWQ4y6jB
+- Определение четного числа.
+  Демонстрация - https://asciinema.org/a/iseXBZL8MftEUjqmn1cydcB7r
 
-asciinema for step 8 - https://asciinema.org/a/whTZEtPSg5FZl3N1Pl7oAFnSl
+- Калькулятор. Арифметические выражения, которые необходимо вычислить.
+  Демонстрация - https://asciinema.org/a/BDBfr7h3zDbqmFMN4NWRiiYeq
 
-asciinema for step 9 - https://asciinema.org/a/7wwx3cWuGmvtB9zkXu0SkQDMY
+- Определение наибольшего общего делителя.
+  Демонстрация - https://asciinema.org/a/yfdKNewNjUUUWbC7AWWQ4y6jB
+
+- Прогрессия. Поиск пропущенных чисел в последовательности чисел.
+  Демонстрация - https://asciinema.org/a/whTZEtPSg5FZl3N1Pl7oAFnSl
+
+- Определение простого числа.
+  Демонстрация - https://asciinema.org/a/7wwx3cWuGmvtB9zkXu0SkQDMY
+
+
+## Сборка
+Сборка приложения производится в Gradle, для этого необходимо выполнить задачу `installDist`.
+В результате сборки приложение будет упаковано в jar файл и получен исполняемый файл, который
+можно будет запустить в консоли.
+
+## Запуск
+После успешного выполения сборки для запуска приложения достаточно в терминале набрать `make run-dist`
+
+
