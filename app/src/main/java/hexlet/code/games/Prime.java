@@ -11,7 +11,7 @@ public class Prime {
         String rules = "Answer 'yes' if given number is prime. Otherwise answer 'no'.";
 
         // Массив вопросов и ответов
-        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][Engine.ATTEMPT_COUNT - 1];
+        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][2];
 
         for (int i = 0; i < questionsAndAnswers.length; i++) {
 

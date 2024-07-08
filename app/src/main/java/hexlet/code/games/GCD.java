@@ -11,7 +11,7 @@ public class GCD {
         String rules = "Find the greatest common divisor of given numbers.";
 
         // Массив вопросов и ответов
-        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][Engine.ATTEMPT_COUNT - 1];
+        String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][2];
 
         final int minRange = 1;
         final int maxRange = 100;
