@@ -9,12 +9,7 @@ public class Calc {
         String rules = "What is the result of the expression?";
 
         String[][] questionsAndAnswers = new String[Engine.ATTEMPT_COUNT][2];
-
-        final int operationCount = 3;
-        String[] operations = new String[operationCount];
-        operations[0] = "+";
-        operations[1] = "-";
-        operations[2] = "*";
+        String[] operations = new String[] {"+", "-", "*"};
 
         for (int i = 0; i < questionsAndAnswers.length; i++) {
 
