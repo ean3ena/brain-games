@@ -15,26 +15,22 @@ public class Calc {
 
             int firstRandomNumber = Util.getRandomNumber();
             int secondRandomNumber = Util.getRandomNumber();
-            String randomTypeOperation = getRandomTypeOperation(operations);
+            int randomOperationNumber = Util.getRandomNumber(0, operations.length);
+            String randomTypeOperation = operations[randomOperationNumber];
 
             questionsAndAnswers[i][0] = firstRandomNumber + " " + randomTypeOperation + " " + secondRandomNumber;
-            questionsAndAnswers[i][1] = getExpectedAnswer(firstRandomNumber, secondRandomNumber, randomTypeOperation);
+            int expectedAnswer = getExpectedAnswer(firstRandomNumber, secondRandomNumber, randomTypeOperation);
+            questionsAndAnswers[i][1] = String.valueOf(expectedAnswer);
         }
         Engine.interactionWithPlayer(rules, questionsAndAnswers);
     }
 
-    private static String getRandomTypeOperation(String[] operations) {
-        int randomNumber = Util.getRandomNumber(0, operations.length);
-        return operations[randomNumber];
-    }
-
-    private static String getExpectedAnswer(int firstNumber, int secondNumber, String typeOperation) {
-        int result = switch (typeOperation) {
+    private static int getExpectedAnswer(int firstNumber, int secondNumber, String typeOperation) {
+        return switch (typeOperation) {
             case "+" -> firstNumber + secondNumber;
             case "-" -> firstNumber - secondNumber;
             case "*" -> firstNumber * secondNumber;
             default -> 0;
         };
-        return Integer.toString(result);
     }
 }
